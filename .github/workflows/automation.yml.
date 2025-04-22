@@ -1,0 +1,55 @@
+name: OECD Data Pipeline
+
+on:
+  push:
+    branches:
+      - main    # Triggers on any commit to main branch, including merges
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight UTC
+  workflow_dispatch:     # Manual trigger
+
+jobs:
+  ingest-oecd-data:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas requests boto3 pyarrow couchdb
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Make scripts executable
+        run: |
+          chmod +x Scripts/ingestion_oecd_to_s3.py
+          chmod +x Scripts/s3_to_kinesis.py
+
+      - name: Run OECD data ingestion
+        run: python Scripts/ingestion_oecd_to_s3.py
+        env:
+          FILE_FORMAT: parquet
+
+      - name: Process data for Kinesis streaming
+        run: python Scripts/s3_to_kinesis.py
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: execution-logs
+          path: |
+            oecd_ingestion.log
+            s3_to_kinesis.log
