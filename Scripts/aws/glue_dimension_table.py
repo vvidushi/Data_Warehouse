@@ -75,10 +75,6 @@ def create_healthcare_star_schema(dataframes):
     
     dataframes = std_dataframes
     star_schema = {}
-    
-    # --------- DIMENSION TABLES ---------
-    
-    # 1. Geography Dimension (Dim_Geography)
     geography_frames = []
     for df in dataframes.values():
         if 'country_code' in df.columns:
