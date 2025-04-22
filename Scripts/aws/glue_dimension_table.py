@@ -8,7 +8,6 @@ import os
 S3_BUCKET = <S3_BUCKET>
 STAGE_PREFIX = 'stage/'
 PROD_PREFIX = 'prod/'
-
 DATASET_MAPPING = {
     'HC_Coverage': 'healthcare_coverage',
     'HealthGFCF': 'health_capital_formation',
@@ -33,7 +32,6 @@ def read_csv_from_s3_folder(s3_client, dataset_folder):
         return None
 
 def write_df_to_s3(s3_client, df, table_name):
-    """Write DataFrame to S3 as CSV"""
     try:
         file_key = f"{PROD_PREFIX}{table_name}.csv"
         csv_buffer = io.StringIO()
