@@ -1,4 +1,4 @@
 # E-R Diagram
 
 
-E-R_Diagram.png
+Design/E-R_Diagram.png
