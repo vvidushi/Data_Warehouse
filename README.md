@@ -1,5 +1,5 @@
 # Prod Table Design
-![Tech_design.png](Design/Tech_design.png)# Tech Design
+![Tech_design.png](Design/Tech_design.png)
 
 # E-R Diagram (Stage)
 
