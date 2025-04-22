@@ -1,4 +1,11 @@
+# Tech Design
+![Tech_design.png](Design/Tech_design.png)
+
 # E-R Diagram
 
+![Relation.png](Design/Relation.png)
 
-![WhatsApp Image 2025-04-14 at 1 36 47 PM](https://github.com/user-attachments/assets/a504ed62-7241-473b-b430-6b5bd3387db6)
+![E-R_Diagram.png](Design/E-R_Diagram.png)
+
+
+
