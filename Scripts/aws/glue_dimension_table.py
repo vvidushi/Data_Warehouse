@@ -8,7 +8,6 @@ import os
 S3_BUCKET = <S3_BUCKET>
 STAGE_PREFIX = 'stage/'
 PROD_PREFIX = 'prod/'
-
 DATASET_MAPPING = {
     'HC_Coverage': 'healthcare_coverage',
     'HealthGFCF': 'health_capital_formation',
@@ -33,7 +32,6 @@ def read_csv_from_s3_folder(s3_client, dataset_folder):
         return None
 
 def write_df_to_s3(s3_client, df, table_name):
-    """Write DataFrame to S3 as CSV"""
     try:
         file_key = f"{PROD_PREFIX}{table_name}.csv"
         csv_buffer = io.StringIO()
@@ -77,10 +75,6 @@ def create_healthcare_star_schema(dataframes):
     
     dataframes = std_dataframes
     star_schema = {}
-    
-    # --------- DIMENSION TABLES ---------
-    
-    # 1. Geography Dimension (Dim_Geography)
     geography_frames = []
     for df in dataframes.values():
         if 'country_code' in df.columns:
