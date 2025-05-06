@@ -1,3 +1,6 @@
+# Architecture:
+TechDesign.drawio.png
+
 # Prod Table Design
 ![Tech_design.png](Design/Tech_design.png)
 
