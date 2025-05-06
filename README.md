@@ -1,4 +1,5 @@
 # Architecture:
+![Tech_design.png](Design/TechDesign.drawio.png)
 
 
 # Tech Design
